@@ -5,10 +5,8 @@ require 'aasm'
 require "block_helpers"
 
 # Patches to the Redmine core.
-require 'dispatcher'
 
-Dispatcher.to_prepare :redmine_kanban do
-
+ActionDispatch::Callbacks.to_prepare do 
   require_dependency 'user_preference'
   UserPreference.send(:include, RedmineKanban::Patches::UserPreferencePatch)
 
@@ -20,6 +18,7 @@ Dispatcher.to_prepare :redmine_kanban do
   unless Issue.included_modules.include? RedmineKanban::IssuePatch
     Issue.send(:include, RedmineKanban::IssuePatch)
   end
+  
 end
 
 
