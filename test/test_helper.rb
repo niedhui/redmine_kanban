@@ -363,7 +363,7 @@ module IntegrationTestHelper
     click_link "My Requests"
       
     assert_response :success
-    assert_equal "/kanban/my-requests", current_url
+    assert_equal "/kanban/my_requests", current_url
   end
 
   def visit_assigned_kanban
@@ -371,7 +371,7 @@ module IntegrationTestHelper
     click_link "My Assignments"
 
     assert_response :success
-    assert_equal "/kanban/my-assigned", current_url
+    assert_equal "/kanban/my_assigned", current_url
   end
   
   def visit_kanban_board

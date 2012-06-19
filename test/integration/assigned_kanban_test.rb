@@ -8,7 +8,7 @@ class AssignedKanbanTest < ActionController::IntegrationTest
 
   context "for anonymous users" do
     should "require login" do
-      visit "/kanban/my-assigned"
+      visit "/kanban/my_assigned"
       
       assert_response :success
       assert_match /login/, current_url
@@ -25,7 +25,7 @@ class AssignedKanbanTest < ActionController::IntegrationTest
       click_link "My Assignments"
       
       assert_response :success
-      assert_equal "/kanban/my-assigned", current_url
+      assert_equal "/kanban/my_assigned", current_url
 
     end
   end
@@ -56,7 +56,7 @@ class AssignedKanbanTest < ActionController::IntegrationTest
       assert_select "form#user_switch", :count => 0
 
       # Visit by url hacking
-      visit "/kanban/assigned-to/#{@another_user.id}"
+      visit "/kanban/assigned_to/#{@another_user.id}"
       assert_response :forbidden
       assert_template 'common/error'
 
@@ -80,7 +80,7 @@ class AssignedKanbanTest < ActionController::IntegrationTest
         Watcher.generate!(:watchable_type => "Issue", :watchable_id => @watched_issue.id, :user => @user)
         assert @watched_issue.watched_by? @user       
         
-        visit "/kanban/assigned-to/#{@user.id}.js?column=incoming"
+        visit "/kanban/assigned_to/#{@user.id}.js?column=incoming"
         doc = HTML::Document.new(response.body)
         
         # New lane
@@ -102,7 +102,7 @@ class AssignedKanbanTest < ActionController::IntegrationTest
         Watcher.generate!(:watchable_type => "Issue", :watchable_id => @watched_issue.id, :user => @user)
         assert @watched_issue.watched_by? @user
 
-        visit "/kanban/assigned-to/#{@user.id}.js?column=testing&project=#{@project.id}"
+        visit "/kanban/assigned_to/#{@user.id}.js?column=testing&project=#{@project.id}"
         doc = HTML::Document.new(response.body)
         
         # Testing lane
@@ -127,7 +127,7 @@ class AssignedKanbanTest < ActionController::IntegrationTest
         Watcher.generate!(:watchable_type => "Issue", :watchable_id => @watched_issue.id, :user => @user)
         assert @watched_issue.watched_by? @user
 
-        visit "/kanban/assigned-to/#{@user.id}.js?column=active&project=#{@project.id}"
+        visit "/kanban/assigned_to/#{@user.id}.js?column=active&project=#{@project.id}"
         doc = HTML::Document.new(response.body)
         
         # Active lane
@@ -152,7 +152,7 @@ class AssignedKanbanTest < ActionController::IntegrationTest
         Watcher.generate!(:watchable_type => "Issue", :watchable_id => @watched_issue.id, :user => @user)
         assert @watched_issue.watched_by? @user
 
-        visit "/kanban/assigned-to/#{@user.id}.js?column=selected&project=#{@project.id}"
+        visit "/kanban/assigned_to/#{@user.id}.js?column=selected&project=#{@project.id}"
         doc = HTML::Document.new(response.body)
 
         # Selected lane
@@ -174,7 +174,7 @@ class AssignedKanbanTest < ActionController::IntegrationTest
         Watcher.generate!(:watchable_type => "Issue", :watchable_id => @watched_issue.id, :user => @user)
         assert @watched_issue.watched_by? @user
         
-        visit "/kanban/assigned-to/#{@user.id}.js?column=backlog&project=#{@project.id}"
+        visit "/kanban/assigned_to/#{@user.id}.js?column=backlog&project=#{@project.id}"
         doc = HTML::Document.new(response.body)
 
         # Backlog lane
@@ -193,7 +193,7 @@ class AssignedKanbanTest < ActionController::IntegrationTest
         Watcher.generate!(:watchable_type => "Issue", :watchable_id => @watched_issue.id, :user => @user)
         assert @watched_issue.watched_by? @user
 
-        visit "/kanban/assigned-to/#{@user.id}.js?column=finished&project=#{@project.id}"
+        visit "/kanban/assigned_to/#{@user.id}.js?column=finished&project=#{@project.id}"
         doc = HTML::Document.new(response.body)
 
         # Finished lane
@@ -212,7 +212,7 @@ class AssignedKanbanTest < ActionController::IntegrationTest
         Watcher.generate!(:watchable_type => "Issue", :watchable_id => @watched_issue.id, :user => @user)
         assert @watched_issue.watched_by? @user
 
-        visit "/kanban/assigned-to/#{@user.id}.js?column=canceled&project=#{@project.id}"
+        visit "/kanban/assigned_to/#{@user.id}.js?column=canceled&project=#{@project.id}"
         doc = HTML::Document.new(response.body)
 
         # Canceled lane
@@ -253,7 +253,7 @@ class AssignedKanbanTest < ActionController::IntegrationTest
         submit_form "user_switch" # JS submission
 
         assert_response :success
-        assert_equal "/kanban/assigned-to/#{@another_user.id}", current_path
+        assert_equal "/kanban/assigned_to/#{@another_user.id}", current_path
 
         assert_select "#content", :text => /#{@another_user.to_s}'s Assignments/
       end

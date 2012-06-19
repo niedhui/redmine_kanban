@@ -9,7 +9,7 @@ class MyRequestsTest < ActionController::IntegrationTest
 
   context "for anonymous users" do
     should "require login" do
-      visit "/kanban/my-requests"
+      visit "/kanban/my_requests"
       
       assert_response :success
       assert_match /login/, current_url
@@ -26,7 +26,7 @@ class MyRequestsTest < ActionController::IntegrationTest
       click_link "My Requests"
       
       assert_response :success
-      assert_equal "/kanban/my-requests", current_url
+      assert_equal "/kanban/my_requests", current_url
 
     end
   end
