@@ -1,5 +1,6 @@
 RedmineApp::Application.routes.draw do
-  resource :kanban, :member => {:sync => :put} do
+  resource :kanban do
+    put :sync,  on: :member
     resources :user_kanbans, :as => 'users'
     resource :user_kanbans, :as => 'my_requests'
     resources :assigned_kanbans, :as => 'assigned_to'
